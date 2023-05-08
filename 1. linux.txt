@@ -1,0 +1,146 @@
+# 1 - 5
+
+aa@ubuntu-vb:~/edu$ cat > 'Домашние животные'
+Собаки
+Кошки
+Хомяки
+^C
+aa@ubuntu-vb:~/edu$ cat > 'Вьючные животные'
+Лошади
+Верблюды
+Ослы
+^C
+aa@ubuntu-vb:~/edu$ cat
+Вьючные животные   Домашние животные
+aa@ubuntu-vb:~/edu$ cat
+Вьючные животные   Домашние животные
+aa@ubuntu-vb:~/edu$ cat Домашние\ животные
+Собаки
+Кошки
+Хо�мяки
+aa@ubuntu-vb:~/edu$ cat Вьючные\ животные
+Ло�шади
+Верблюды
+Ослы
+aa@ubuntu-vb:~/edu$ cat 'Домашние животные' 'Вьючные животные' > 'Друзья человека'
+aa@ubuntu-vb:~/edu$ cat Друзья\ человека
+Собаки
+Кошки
+Хо�мяки
+Ло�шади
+Верблюды
+Ослы
+
+
+
+aa@ubuntu-vb:~/edu$ mkdir new_dir
+aa@ubuntu-vb:~/edu$ mv Друзья\ человека new_dir/
+aa@ubuntu-vb:~/edu$ tree
+.
+├── new_dir
+│   └── Друзья человека
+├── Вьючные животные
+└── Домашние животные
+
+1 directory, 3 files
+
+
+# переключился на другую машину
+# при подключении репозитория mysql в ручную, постоянно была ошибка о сломанных пакетах, поэтому сделал через пакет и интрукцию с оф сайта mysql
+
+aa@weaselcloud-2421:~/edu$ wget https://dev.mysql.com/get/mysql-apt-config_0.8.25-1_all.deb
+--2023-04-26 18:24:06--  https://dev.mysql.com/get/mysql-apt-config_0.8.25-1_all.deb
+Resolving dev.mysql.com (dev.mysql.com)... 23.199.218.160, 2a02:26f0:f4:19e::2e31, 2a02:26f0:f4:1a3::2e31
+Connecting to dev.mysql.com (dev.mysql.com)|23.199.218.160|:443... connected.
+HTTP request sent, awaiting response... 302 Moved Temporarily
+Location: https://repo.mysql.com//mysql-apt-config_0.8.25-1_all.deb [following]
+--2023-04-26 18:24:06--  https://repo.mysql.com//mysql-apt-config_0.8.25-1_all.deb
+Resolving repo.mysql.com (repo.mysql.com)... 104.123.44.225
+Connecting to repo.mysql.com (repo.mysql.com)|104.123.44.225|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 18120 (18K) [application/x-debian-package]
+Saving to: ‘mysql-apt-config_0.8.25-1_all.deb’
+
+mysql-apt-config_0.8.25-1_all 100%[=================================================>]  17.70K  --.-KB/s    in 0s
+
+2023-04-26 18:24:07 (176 MB/s) - ‘mysql-apt-config_0.8.25-1_all.deb’ saved [18120/18120]
+
+aa@weaselcloud-2421:~/edu$ dpkg -i mysql-apt-config_0.8.25-1_all.deb
+dpkg: error: requested operation requires superuser privilege
+aa@weaselcloud-2421:~/edu$ sudo !!
+sudo dpkg -i mysql-apt-config_0.8.25-1_all.deb
+Selecting previously unselected package mysql-apt-config.
+(Reading database ... 94213 files and directories currently installed.)
+Preparing to unpack mysql-apt-config_0.8.25-1_all.deb ...
+Unpacking mysql-apt-config (0.8.25-1) ...
+Setting up mysql-apt-config (0.8.25-1) ...
+aa@weaselcloud-2421:~/edu$ sudo apt update
+Get:1 http://repo.mysql.com/apt/ubuntu jammy InRelease [15.2 kB]
+Hit:2 http://nova.clouds.archive.ubuntu.com/ubuntu jammy InRelease
+Hit:3 http://nova.clouds.archive.ubuntu.com/ubuntu jammy-updates InRelease
+Hit:4 http://nova.clouds.archive.ubuntu.com/ubuntu jammy-backports InRelease
+Get:5 http://repo.mysql.com/apt/ubuntu jammy/mysql-8.0 Sources [964 B]
+Get:6 http://repo.mysql.com/apt/ubuntu jammy/mysql-apt-config amd64 Packages [565 B]
+Get:7 http://repo.mysql.com/apt/ubuntu jammy/mysql-8.0 amd64 Packages [8615 B]
+Get:8 http://repo.mysql.com/apt/ubuntu jammy/mysql-tools amd64 Packages [7997 B]
+Hit:9 http://security.ubuntu.com/ubuntu jammy-security InRelease
+Fetched 33.3 kB in 3s (10.8 kB/s)
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+11 packages can be upgraded. Run 'apt list --upgradable' to see them.
+
+aa@weaselcloud-2421:~/edu$ sudo apt install mysql-server
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following packages were automatically installed and are no longer required:
+  libflashrom1 libftdi1-2
+Use 'sudo apt autoremove' to remove them.
+The following additional packages will be installed:
+  libmecab2 mecab-ipadic mecab-ipadic-utf8 mecab-utils mysql-client mysql-common mysql-community-client
+  mysql-community-client-core mysql-community-client-plugins mysql-community-server mysql-community-server-core
+The following NEW packages will be installed:
+  libmecab2 mecab-ipadic mecab-ipadic-utf8 mecab-utils mysql-client mysql-common mysql-community-client
+reading /usr/share/mecab/dic/ipadic/Adverb.csv ... 3032
+reading /usr/share/mecab/dic/ipadic/Prefix.csv ... 221
+reading /usr/share/mecab/dic/ipadic/Auxil.csv ... 199
+reading /usr/share/mecab/dic/ipadic/Noun.nai.csv ... 42
+reading /usr/share/mecab/dic/ipadic/Conjunction.csv ... 171
+reading /usr/share/mecab/dic/ipadic/Adj.csv ... 27210
+reading /usr/share/mecab/dic/ipadic/Filler.csv ... 19
+reading /usr/share/mecab/dic/ipadic/Others.csv ... 2
+emitting double-array: 100% |###########################################|
+reading /usr/share/mecab/dic/ipadic/matrix.def ... 1316x1316
+emitting matrix      : 100% |###########################################|
+
+done!
+update-alternatives: using /var/lib/mecab/dic/ipadic-utf8 to provide /var/lib/mecab/dic/debian (mecab-dictionary) in auto mode
+Setting up mysql-community-client (8.0.33-1ubuntu22.04) ...
+Setting up mysql-client (8.0.33-1ubuntu22.04) ...
+Setting up mysql-community-server (8.0.33-1ubuntu22.04) ...
+update-alternatives: using /etc/mysql/mysql.cnf to provide /etc/mysql/my.cnf (my.cnf) in auto mode
+Created symlink /etc/systemd/system/multi-user.target.wants/mysql.service → /lib/systemd/system/mysql.service.
+Setting up mysql-server (8.0.33-1ubuntu22.04) ...
+Processing triggers for man-db (2.10.2-1) ...
+Processing triggers for libc-bin (2.35-0ubuntu3.1) ...
+Scanning processes...
+Scanning candidates...
+Scanning linux images...
+
+Running kernel seems to be up-to-date.
+
+Restarting services...
+Service restarts being deferred:
+ systemctl restart systemd-logind.service
+ systemctl restart user@1001.service
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+
+
+
+
